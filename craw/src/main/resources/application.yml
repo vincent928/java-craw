@@ -1,0 +1,55 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /craw
+    session:
+      timeout: 30M
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  application:
+    name: my-blog-craw
+  datasource:
+    url: jdbc:mysql:///my-blog?charset=utf8mb4&serverTimezone=UTC&useSSL=true
+    username: root
+    password: 123456
+    platform: mysql
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,slf4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    maxOpenPreparedStatements: 20
+  redis:
+    host:
+    port:
+    password:
+    database: 0
+    jedis:
+      pool:
+        max-active: 32
+        max-wait: 5S
+        max-idle: 16
+        min-idle: 8
+    timeout: 30S
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

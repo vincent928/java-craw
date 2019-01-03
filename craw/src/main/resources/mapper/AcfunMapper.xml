@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.moon.acfun.AcfunMapper">
+
+
+    <insert id="addArticles" parameterType="list">
+        insert into acfun_article(title,up_name,create_time,content,link,type)
+        values
+        <foreach collection="entities" index="index" item="item" separator=",">
+            (#{item.title,jdbcType=VARCHAR},#{item.upName,jdbcType=VARCHAR},#{item.createTime,jdbcType=TIMESTAMP},
+            #{item.content,jdbcType=VARCHAR},#{item.link,jdbcType=VARCHAR},#{item.type,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+</mapper>
